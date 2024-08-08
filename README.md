@@ -21,3 +21,14 @@ ORDER BY name, prumerna_rocni_mzda, payroll_year
 
 Tam, kde není rok chronologicky seřazen, došlo k meziročnímu poklesu mezd, např. Administrativní a podpůrné činnosti v r. 2013
 
+
+Otázka č. 2: Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
+
+-- cena mléka a chleba ve srovnatelném prvním a posledním období - mleko 114201, chleb 111301
+
+SELECT category_code, YEAR(date_from), ROUND(AVG(value),1) AS cena
+FROM czechia_price 
+WHERE category_code IN (114201,111301)
+AND YEAR(date_from) IN (2006,2018)
+GROUP BY category_code, YEAR (date_from) 
+
